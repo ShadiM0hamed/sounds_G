@@ -1,6 +1,7 @@
 import pygame
 import time
 import os
+from generate_response import  text_to_speech
 
 def play_audio(filename):
     pygame.mixer.init()
@@ -16,3 +17,7 @@ def play_audio(filename):
     except PermissionError as e:
         print(f"Could not delete the audio file immediately: {e}")
         # Optionally, try again after a longer delay or log this for later cleanup.
+        
+def speech_answer(text):
+    ret = text_to_speech(text)
+    play_audio (ret)

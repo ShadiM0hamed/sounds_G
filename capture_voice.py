@@ -19,5 +19,3 @@ def get_audio(lang='ar'):
     except sr.RequestError as e:
         print(f"Could not request results from Google Speech Recognition service; {e}")
         return ""
-    
-get_audio()
