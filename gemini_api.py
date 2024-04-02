@@ -3,8 +3,11 @@ import os
 from deep_translator import GoogleTranslator
 from snapshot import snapshot
 from PIL import Image
+from dotenv import dotenv_values
 
-genai.configure(api_key=os.getenv('AIzaSyCHyeW-T_9nEo8H3NMiaCcqcZHn0Stq1pE') or "AIzaSyCI-QMRm02I_LhpT7Lx1dY1YgFAJEg0xCA")
+GEMINI_KEY = dotenv_values('.env').get('gemini_api')
+
+genai.configure(api_key=os.getenv(GEMINI_KEY) or GEMINI_KEY)
 
 model =  genai.GenerativeModel("gemini-pro")
 vision_model = genai.GenerativeModel("models/gemini-pro-vision")
