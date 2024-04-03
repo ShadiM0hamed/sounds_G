@@ -15,7 +15,7 @@ import time
 
 
 def snapshot():
-    cap = cv2.VideoCapture(2)
+    cap = cv2.VideoCapture(-1)
 
     counter = 0  # Initialize frame counter
 

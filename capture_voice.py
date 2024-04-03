@@ -1,4 +1,5 @@
 import speech_recognition as sr
+import sounddevice
 
 ''' open microphone then capture,
     and recognize voice using speech recognition Library,

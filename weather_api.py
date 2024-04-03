@@ -1,9 +1,15 @@
 import requests
 from generate_response import  text_to_speech
 from playing_audio import  play_audio
+from dotenv import dotenv_values
 
-def get_weather(api_key, city):
-    api_key = "5f38ab307a314fff97144906243003"
+GEMINI_KEY = dotenv_values('.env').get('gemini_api')
+WEATHER_KEY = dotenv_values('.env').get('weather_api')
+
+city = "Cairo"
+
+def get_weather():
+    api_key = WEATHER_KEY
 
     url = f"http://api.weatherapi.com/v1/current.json?key={api_key}&q={city}&aqi=no"
     response = requests.get(url)
@@ -12,14 +18,13 @@ def get_weather(api_key, city):
         data = response.json()
         weather = data['current']["temp_c"]
         
-        return weather
+        # Example usage:
+        if weather:
+            tex = f"درجة الحرارة الان هي {weather} سيليزياس"
+                
+        return tex
     else:
         print("Error fetching weather data:", response.status_code)
         return None
 
-# Example usage:
-city = "Cairo"
-api_key = "5f38ab307a314fff97144906243003"
-weather = get_weather(api_key, city)
-if weather:
-    play_audio(text_to_speech(f"درجة الحرارة الان هي {weather} سيليزياس"))
+print(get_weather())

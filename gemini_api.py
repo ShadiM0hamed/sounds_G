@@ -17,21 +17,26 @@ def gemini_response(query):
 
     response = model.generate_content("Answery briefly, \n" + en_translated_query).text
 
-    ar_translated_rsponse = GoogleTranslator(source='auto', target='ar').translate(response)
+    ar_translated_rsponse = GoogleTranslator(source='auto', target='ar').translate(response.text)
 
     return ar_translated_rsponse
 
 
-def gemini_vision_response(img):
+def gemini_vision_response(img, question = 'Describe this image'):
     # response = vision_model.generate_content(Image.fromarray(img))  # simply pass the image
     # print(response.text)
     # #Output:
     # # Stunning!
+    en_translated_query = GoogleTranslator(source='auto', target='en').translate(question)
 
-    response = vision_model.generate_content(["where is the phone in this image?", Image.fromarray(img)])  
-    # pass image and text
-    print(response.text)
+
+    response = vision_model.generate_content([en_translated_query, Image.fromarray(img)])  
     
-    return response.text
+    ar_translated_rsponse = GoogleTranslator(source='auto', target='ar').translate(response.text)
 
-gemini_vision_response(snapshot())
+    # pass image and text
+    print(ar_translated_rsponse)
+    
+    return ar_translated_rsponse
+
+# gemini_vision_response(snapshot())
